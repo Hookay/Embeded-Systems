@@ -38,24 +38,24 @@ void setup() {
     int s1 =digitalRead(SW1);
     int s2 =digitalRead(SW2);
     
-    //if the first switch is pressed do this
+    //if the first switch is not pressed do this
     if(s1==0){
     
       // check if the second switch is pressed 
       if(s2==1){
-         //if yes change to different sequence
-         c=c1-3; }
-      else{
+         //if yes change to different sequence reduce pulses
+         c=c1-3; 
+      }else{
         // if not carry on sequence
         c=c1;
       }
       
-      //signal B starts every sequence
-      digitalWrite(B,HIGH);
-      delay(50);
-      digitalWrite(B,LOW);
+      //signal B - starts every sequence to trigger oscilloscope
+      digitalWrite(B,HIGH);// turn the LED on (HIGH is the voltage level)
+      delay(50);// wait for a given time 
+      digitalWrite(B,LOW);// turn the LED off by making the voltage LOW
       
-      //code runs repetedly c times signal A
+      //signal A - code runs repetedly c times 
       for(int i=1;i<=c;i++){
         digitalWrite(A, HIGH);   // turn the LED on (HIGH is the voltage level)
         delay((a + (50*i)));     // wait for a given time (increases with rounds)
@@ -70,7 +70,7 @@ void setup() {
 
 
     }else{
-     digitalWrite(A, LOW);   // turn the LED off                   
+     digitalWrite(A, LOW);   // turn the LED off  by making the voltage LOW                 
      digitalWrite(B, LOW);    // turn the LED off by making the voltage LOW
     }
   }
