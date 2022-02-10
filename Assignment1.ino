@@ -12,11 +12,11 @@ Author:Reka Hegedus
 #define SW2 27
 
 //variables 
-float led_light = 1;//if testing with led 100 if oscilloscope 1
+float led_light = 1.0;//if testing with led 100 if oscilloscope 1
 float a = 0.8*led_light;
 float b = 0.5*led_light;
-int pulse =0;
-int c = 11;
+float pulse =0.0;
+float c = 11.0;
 float d = 2.5*led_light;
 
  
@@ -28,7 +28,7 @@ void setup() {
   pinMode(SW1,INPUT);
   pinMode(SW2,INPUT);
   
-  Serial.begin(9600); // open the serial port at 9600 bps:
+  //Serial.begin(9600); // open the serial port at 9600 bps:
 }
 
 
@@ -58,11 +58,12 @@ void setup() {
       digitalWrite(B,LOW);
       
       //code runs repetedly c times signal A
-      for(int i=0;i<pulse;i++){
-
+      for(float i=0.0;i<pulse;i++){
+        // led_light is 1 when testing oscilloscope and 100 or 1000 when testing with led scaler 
+        // create variable for delay add to  a  50 micro s (which is 0.05 milisecond in the delay() function) and at each run increase the added value by mulitiplying it wit index 1 50*0,2 50*1...
         float dd = a + ((0.050*led_light)*i);
-
-        Serial.println(dd,DEC);
+         
+        //Serial.println(dd,DEC);
         digitalWrite(A, HIGH);   // turn the LED on (HIGH is the voltage level)
         delay(dd);     // wait for a given time (increases with rounds)
         digitalWrite(A, LOW);    // turn the LED off by making the voltage LOW
