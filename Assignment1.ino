@@ -12,11 +12,12 @@ Author:Reka Hegedus
 #define SW2 27
 
 //variables 
-int a = 800;
-int b = 500;
-int c =0;
-int c1 = 11;
-int d = 2500;
+float led_light = 1;//if testing with led 100 if oscilloscope 1
+float a = 0.8*led_light;
+float b = 0.5*led_light;
+int pulse =0;
+int c = 11;
+float d = 2.5*led_light;
 
  
 // the setup function runs once when you press reset or power the board
@@ -27,8 +28,9 @@ void setup() {
   pinMode(SW1,INPUT);
   pinMode(SW2,INPUT);
   
- 
+  Serial.begin(9600); // open the serial port at 9600 bps:
 }
+
 
 
   // the loop function runs over and over again forever checking for changes
@@ -38,27 +40,31 @@ void setup() {
     int s1 =digitalRead(SW1);
     int s2 =digitalRead(SW2);
     
-    //if the first switch is not pressed do this
+    //if the first switch is pressed do this
     if(s1==0){
     
       // check if the second switch is pressed 
       if(s2==1){
-         //if yes change to different sequence reduce pulses
-         c=c1-3; 
-      }else{
+         //if yes change to different sequence
+         pulse=c-3; }
+      else{
         // if not carry on sequence
-        c=c1;
+        pulse=c;
       }
       
-      //signal B - starts every sequence to trigger oscilloscope
-      digitalWrite(B,HIGH);// turn the LED on (HIGH is the voltage level)
-      delay(50);// wait for a given time 
-      digitalWrite(B,LOW);// turn the LED off by making the voltage LOW
+      //signal B starts every sequence
+      digitalWrite(B,HIGH);
+      delay(0.050*led_light);
+      digitalWrite(B,LOW);
       
-      //signal A - code runs repetedly c times 
-      for(int i=1;i<=c;i++){
+      //code runs repetedly c times signal A
+      for(int i=0;i<pulse;i++){
+
+        float dd = a + ((0.050*led_light)*i);
+
+        Serial.println(dd,DEC);
         digitalWrite(A, HIGH);   // turn the LED on (HIGH is the voltage level)
-        delay((a + (50*i)));     // wait for a given time (increases with rounds)
+        delay(dd);     // wait for a given time (increases with rounds)
         digitalWrite(A, LOW);    // turn the LED off by making the voltage LOW
         delay(b);                // wait for a time
        
@@ -70,7 +76,7 @@ void setup() {
 
 
     }else{
-     digitalWrite(A, LOW);   // turn the LED off  by making the voltage LOW                 
+     digitalWrite(A, LOW);   // turn the LED off                   
      digitalWrite(B, LOW);    // turn the LED off by making the voltage LOW
     }
   }
