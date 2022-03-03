@@ -24,4 +24,5 @@ void setup() {
   Serial.println(averageDuration,DEC);
 }
 
+
 void loop() {}
