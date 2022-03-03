@@ -9,8 +9,11 @@ void setup() {
   pinMode(SW1,INPUT);
   //start measuring time in milisecond
   unsigned long timeBegin = micros();
+   for (int i = 0; i < 500; i++)
+  {
      //run task
      int s1 =digitalRead(SW1);
+   }
   //end count
   unsigned long timeEnd = micros();
   //calculate elapsed time
