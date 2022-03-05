@@ -1,4 +1,3 @@
-
 //get pin
 #define B 26
 //add trigger signal variables
@@ -29,9 +28,10 @@ void setup() {
   //getduration
   unsigned long duration = timeEnd - timeBegin;
   //get average
-  double averageDuration = (double)duration / 1000.0;
+  double averageDuration = (double)duration / 500.0;
   //show it in port
   Serial.println(averageDuration,DEC);
+
 }
 
 void loop() {}
