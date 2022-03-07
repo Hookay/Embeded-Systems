@@ -15,7 +15,7 @@ void setup() {
   {
      //run task
      int s1 =digitalRead(SIG);
-     Serial.println(s1,DEC);
+    // Serial.println(s1,DEC);
      
   }
   //end count
