@@ -27,7 +27,7 @@ void setup() {
   //calculate elapsed time
   unsigned long duration = timeEnd - timeBegin;
   //get the average of the tasks
-  double averageDuration = (double)duration / 1000.0;
+  double averageDuration = (double)duration / 500.0;
   //print the result in the serial port
   Serial.println(averageDuration,DEC);
 }
