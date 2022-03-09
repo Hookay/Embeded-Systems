@@ -10,7 +10,7 @@ int error_code=0;
 //add trigger signal variables for task1
 float trig = 50;
 float rest =19950;
-int counter = 0;
+int counter = millis();
 int button=0;
 float freq = 0;
 int pot=0;
@@ -110,32 +110,29 @@ void setup() {
     Serial.println(pot);
   }
 
-
-
-
-
 void loop() {
 
-  counter++;
-  task1();
-  if(counter %10==0){
+  if(counter %20==0){
+    task1();
+  }
+  if(counter %200==0){
     task2();
   }
-  if(counter %50==0){
+  if(counter %1000==0){
     task3();
   }
-  if(counter %2==0){
+  if(counter %40==0){
     task4();
     task5();
   }
-  if(counter %5==0){
+  if(counter %100==0){
     task6();
   }
-  if(counter %17==0){
+  if(counter %((1/3)*1000)==0){
     task7();
     task8();
   }
-  if(counter %250==0){
+  if(counter %5000==0){
     task9(); 
   }
 }
