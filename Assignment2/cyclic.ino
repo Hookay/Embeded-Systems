@@ -136,7 +136,7 @@ void loop() {
   if(counter %200000==0){
     task2();
   }
-  if(counter %(340000)==0){
+  if(counter %320000==0){
     
     task7();
     task8();
