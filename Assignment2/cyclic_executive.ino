@@ -138,7 +138,7 @@ counter++;
   if(counter %300000==0){
     task2();
   }
-  if(counter %(510000)==0){
+  if(counter %(480000)==0){
     
     task7();
     task8();
