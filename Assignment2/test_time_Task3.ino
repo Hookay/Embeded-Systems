@@ -19,7 +19,7 @@ float s2;
 s1 = pulseIn(SQW,HIGH);
 s2 = pulseIn(SQW,LOW);
 float period = s1+s2; //is in microseconds
-float freq=1e6/period; //dividing by 1e6 as this is 1micro in second as you need to scale it
+float freq=1e6/period; // scale it
 
 
 //Serial.println(freq);
