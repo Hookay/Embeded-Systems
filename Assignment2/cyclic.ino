@@ -10,10 +10,12 @@ int error_code=0;
 //add trigger signal variables for task1
 float trig = 50;
 float rest =19950;
-int counter = micros();
+int counter; 
 int button=0;
 float freq = 0;
-int pot=0;
+float pot=0;
+float filter=0;
+
 
 void setup() {
   //open serial port
@@ -35,17 +37,17 @@ void setup() {
     digitalWrite(B, HIGH);
     delayMicroseconds(trig);
     digitalWrite(B, LOW);
-    delayMicroseconds(rest);
+    
   }
 
   //task 2 read switch button
-  int task2(){
+  void task2(){
     button =digitalRead(pushButton);
-    return button;
+    
   }
 
   //task3 read square wave
-  float task3(){
+  void task3(){
     float s1;
     float s2;
 
@@ -53,29 +55,30 @@ void setup() {
     s2 = pulseIn(SQW,LOW);
     float period = s1+s2; //is in microseconds
     freq=1e6/period; //dividing by 1e6 as this is 1micro in second as you need to scale it
-    return freq;
+    
   
   }
 
   //Task 4 read in potentiometer value
   void task4()
   {
-    int potentiometer =digitalRead(PO);  
+    pot =digitalRead(PO);  
+    
   }
 
   //Task5  filter
-  int task5()
-  {
+  void task5()
+  { float sum=0;
     for (int i = 0; i < 4; i++){
       //run task
-      pot = pot+digitalRead(PO);
+      sum = sum+pot;
     }
-    pot=pot/4;
-    return pot;
+    filter=sum/4;
   }
 
   //Task6 loop 1000 times 
   void task6(){
+    //Serial.println(counter);
     for (int i = 0; i < 1000; i++)
     { 
       __asm__ __volatile__ ("nop");
@@ -85,19 +88,23 @@ void setup() {
 
   //Task7 get error from potentiometer
   void task7(){
-    if (pot > 0.5){
+    if (filter > 0.5){
       error_code = 1;
     }else{
       error_code = 0;}
+    
   }
 
   //Task8 display error on LED
   void task8(){
+    
     //if switch is used
-    if(error_code==1){     
+    if(error_code==1){
+         
       //create 50 microseconds high to light up lamp with switch
       digitalWrite(LED, HIGH);
     }else{
+      
       digitalWrite(LED, LOW);}
   }
 
@@ -112,27 +119,34 @@ void setup() {
 
 void loop() {
 
+  counter = micros();
+
   if(counter %20000==0){
+    
     task1();
-  }
-  if(counter %200000==0){
-    task2();
-  }
-  if(counter %1000000==0){
-    task3();
+    
   }
   if(counter %40000==0){
     task4();
-    task5();
+    task5(); 
   }
   if(counter %100000==0){
     task6();
   }
-  if(counter %((1/3)*1000000)==0){
+  if(counter %200000==0){
+    task2();
+  }
+  if(counter %(340000)==0){
+    
     task7();
     task8();
+  }
+  if(counter %1000000==0){
+    task3();
   }
   if(counter %5000000==0){
     task9(); 
   }
+
+  
 }
