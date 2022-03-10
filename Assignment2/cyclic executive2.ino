@@ -38,7 +38,7 @@ void setup() {
 
   //task 1 Read oscilloscope
   void task1(){
-    //make LED output light up
+    //make output light up
     digitalWrite(B, HIGH);
     //for 50 microseconds
     delayMicroseconds(trig);
