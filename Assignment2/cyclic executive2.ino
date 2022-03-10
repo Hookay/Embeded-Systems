@@ -112,7 +112,7 @@ void setup() {
     //if switch is used
     if(error_code==1){
          
-      //create 50 microseconds high to light up lamp with switch and show error_code is 1
+      //create  high to show error_code is 1
       digitalWrite(LED, HIGH);
     }else{
       //esle keep it switched off 
