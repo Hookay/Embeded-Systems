@@ -130,7 +130,7 @@ void setup() {
     //print Hz
     Serial.print("Hz, ");
     //print the potentiometer value
-    Serial.println(pot);
+    Serial.println(filter);
   }
 
 
