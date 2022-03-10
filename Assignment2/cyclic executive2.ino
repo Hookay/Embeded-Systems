@@ -56,12 +56,10 @@ void setup() {
 
   //task3 read square wave
   void task3(){
-    //create values to store samples
-    float s1;
-    float s2;
+    
     //get samples from high level and low level
-    s1 = pulseIn(SQW,HIGH);
-    s2 = pulseIn(SQW,LOW);
+    float s1 = pulseIn(SQW,HIGH);
+    float s2 = pulseIn(SQW,LOW);
     //create the whole period by adding it 
     float period = s1+s2; 
     //scale the value to seconds in order to get the frequency
